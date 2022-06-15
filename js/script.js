@@ -42,7 +42,7 @@ function startGame(){
     const bombs = generateBombs (16 , 1 , maxRangeNumber);
     console.log(bombs);
 
-    const maxtry= maxRangeNumber - 16;
+    const maxtry= 2 //maxRangeNumber - 16;
 
     const numberok = [];
 
@@ -74,8 +74,8 @@ function startGame(){
                 this.classList.add('blue');
               }
               if(numberok.length === maxtry){
-                gamecontrol = false;
-                
+                control = false;
+                alert ('hai vinto');
                }
         }
        
