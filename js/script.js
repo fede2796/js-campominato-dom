@@ -87,7 +87,7 @@ function startGame(){
                 usermessage.innerHTML = 'Hai Vinto :)'
             }
             else{
-                usermessage.innerHTML = `Hai Perso :( Mi dispiace, ritenta. Il numero di tentativi azzeccati è : ${numberok}`;
+                usermessage.innerHTML = `Hai Perso :( Mi dispiace, ritenta. Il numero di tentativi azzeccati è : ${numberok.length}`;
             }
         
         }
