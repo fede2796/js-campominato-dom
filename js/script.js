@@ -14,6 +14,7 @@ playbtn.addEventListener('click', startGame);
 function startGame(){
     const maingrid = document.querySelector('#main-grid');
     const level = parseInt(document.querySelector('#user-level').value);
+    const usermessage = document.getElementById('user-message');
     console.log(level);
 
     //Reset
@@ -42,7 +43,7 @@ function startGame(){
     const bombs = generateBombs (16 , 1 , maxRangeNumber);
     console.log(bombs);
 
-    const maxtry= 2 //maxRangeNumber - 16;
+    const maxtry=  maxRangeNumber - 16;
 
     const numberok = [];
 
@@ -60,29 +61,39 @@ function startGame(){
         }
     }
    
-    let control = true ;
+
     function cellclick(){
         const userNumber =parseInt(this.querySelector('span').innerHTML);
         if(bombs.includes(userNumber)){
             this.classList.add('red');
-            control= false;
-            alert('hai perso')
+            this.style.pointerEvents = 'none';
+            end ('lost', numberok);
+
         }
         else{
             if(!numberok.includes(userNumber)){
                 numberok.push(userNumber);
                 this.classList.add('blue');
+                this.style.pointerEvents = 'none';
               }
               if(numberok.length === maxtry){
-                control = false;
-                alert ('hai vinto');
+                end('won', numberok);
                }
         }
        
        
-        console.log(numberok);
+        function end(endresult, numberok){
+            if(endresult === 'won'){
+                usermessage.innerHTML = 'Hai Vinto :)'
+            }
+            else{
+                usermessage.innerHTML = `Hai Perso :( Mi dispiace, ritenta. Il numero di tentativi azzeccati è : ${numberok}`;
+            }
+        
+        }
         
     }
+
    
 
 }
