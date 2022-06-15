@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+header{
+    
+}
 #main-grid {
     width: 700px;
     height: 700px;
