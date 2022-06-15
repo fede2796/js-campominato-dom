@@ -55,61 +55,36 @@ function startGame(){
             const cell = document.createElement('div');
             cell.innerHTML = `<span>${i}</span>`;
             cell.classList.add('square');
-            cell.addEventListener('click',cellclick )
+            cell.addEventListener('click',cellclick);
             maingrid.append(cell);
         }
     }
    
-
+    let control = true ;
     function cellclick(){
         const userNumber =parseInt(this.querySelector('span').innerHTML);
         if(bombs.includes(userNumber)){
             this.classList.add('red');
+            control= false;
+            alert('hai perso')
         }
         else{
-            this.classList.add('blue');
+            if(!numberok.includes(userNumber)){
+                numberok.push(userNumber);
+                this.classList.add('blue');
+              }
+              if(numberok.length === maxtry){
+                gamecontrol = false;
+                
+               }
         }
        
-        numberok.push(userNumber);
+       
         console.log(numberok);
-    }
-    
-    let gamecontrol = true;
-
-    gametry();
-
-    function gametry(){
-        const controlnumber =parseInt(this.querySelector('span').innerHTML);
-        while(gamecontrol){
-            if(bombs.includes(controlnumber)){
-                gamecontrol = false;
-                end ('lost', numberok);
-            }
-            else{
-           if(!numberok.includes(userNumber)){
-             numberok.push(userNumber);
-           }
-           if(numberok.length === maxtry){
-            gamecontrol = false;
-            end('won', numberok);
-           }
-        }   
         
-        }
     }
-    
-  
+   
 
-    function end(endresult, numberok){
-        if(endresult === 'won'){
-            alert('Hai Vinto');
-        }
-        else{
-            alert('Hai Perso');
-            alert('Tentativi azzeccati: ' + numberok.length);
-        }
-    
-    }
 }
 
 // FUNZIONI UTILI
