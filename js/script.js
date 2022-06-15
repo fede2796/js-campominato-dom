@@ -59,9 +59,56 @@ function startGame(){
             maingrid.append(cell);
         }
     }
+   
 
     function cellclick(){
+        const userNumber =parseInt(this.querySelector('span').innerHTML);
+        if(bombs.includes(userNumber)){
+            this.classList.add('red');
+        }
+        else{
+            this.classList.add('blue');
+        }
+       
+        numberok.push(userNumber);
+        console.log(numberok);
+    }
+    
+    let gamecontrol = true;
+
+    gametry();
+
+    function gametry(){
+        const controlnumber =parseInt(this.querySelector('span').innerHTML);
+        while(gamecontrol){
+            if(bombs.includes(controlnumber)){
+                gamecontrol = false;
+                end ('lost', numberok);
+            }
+            else{
+           if(!numberok.includes(userNumber)){
+             numberok.push(userNumber);
+           }
+           if(numberok.length === maxtry){
+            gamecontrol = false;
+            end('won', numberok);
+           }
+        }   
         
+        }
+    }
+    
+  
+
+    function end(endresult, numberok){
+        if(endresult === 'won'){
+            alert('Hai Vinto');
+        }
+        else{
+            alert('Hai Perso');
+            alert('Tentativi azzeccati: ' + numberok.length);
+        }
+    
     }
 }
 

@@ -28,3 +28,9 @@
     width: calc(100% / 7);
     height: calc(100% / 7) ;
 }
+.red{
+    background-color: red;
+}
+.blue{
+    background-color: blue;
+}
