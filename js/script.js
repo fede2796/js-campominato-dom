@@ -20,6 +20,8 @@ function startGame(){
     //Reset
     maingrid.innerHTML = '';
     maingrid.className = '';
+    usermessage.innerHTML = '';
+    usermessage.className = '';
 
     let maxRangeNumber;
     let squarelevel;
@@ -43,7 +45,7 @@ function startGame(){
     const bombs = generateBombs (16 , 1 , maxRangeNumber);
     console.log(bombs);
 
-    const maxtry=  maxRangeNumber - 16;
+    const maxtry =  maxRangeNumber - 16;
 
     const numberok = [];
 
@@ -61,35 +63,52 @@ function startGame(){
         }
     }
    
-
+    
     function cellclick(){
         const userNumber =parseInt(this.querySelector('span').innerHTML);
-        if(bombs.includes(userNumber)){
-            this.classList.add('red');
-            this.style.pointerEvents = 'none';
-            end ('lost', numberok);
-
-        }
-        else{
-            if(!numberok.includes(userNumber)){
-                numberok.push(userNumber);
-                this.classList.add('blue');
+            if(bombs.includes(userNumber)){
+                this.classList.add('red');
                 this.style.pointerEvents = 'none';
-              }
-              if(numberok.length === maxtry){
-                end('won', numberok);
-               }
-        }
+                end ('lost', numberok);
+            }
+            else{
+                if(!numberok.includes(userNumber)){
+                    numberok.push(userNumber);
+                    this.classList.add('blue');
+                    this.style.pointerEvents = 'none';
+                  }
+                  if(numberok.length === maxtry){
+                    end('won', numberok);
+                    game = false;
+                   }
+            }
        
        
         function end(endresult, numberok){
+
             if(endresult === 'won'){
                 usermessage.innerHTML = 'Hai Vinto :)'
             }
             else{
                 usermessage.innerHTML = `Hai Perso :( Mi dispiace, ritenta. Il numero di tentativi azzeccati è : ${numberok.length}`;
             }
-        
+            
+            //Rendo non cliccabili le celle dopo che ho perso
+            const allsquares = document.querySelectorAll('.square');
+            
+            for(let i = 0; i < allsquares.length; i++){
+                const thisSquare = allsquares[i];
+
+                //Non cliccabile
+                thisSquare.style.pointerEvents = 'none';
+
+                //Per vedere tutte le celle rosse
+                const thisSquareNumber = parseInt(thisSquare.querySelector('span').innerHTML);
+
+                if(bombs.includes(thisSquareNumber)){
+                    thisSquare.classList.add('red');
+                }
+            }
         }
         
     }
